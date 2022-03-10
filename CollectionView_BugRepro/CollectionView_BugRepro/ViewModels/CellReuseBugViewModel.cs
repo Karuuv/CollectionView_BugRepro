@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CollectionView_BugRepro.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class CellReuseBugViewModel : BaseViewModel
     {
         public ObservableCollection<Item> Items { get; }
         public Command LoadItemsCommand { get; }
@@ -32,7 +32,7 @@ namespace CollectionView_BugRepro.ViewModels
         }
 
 
-        public ItemsViewModel()
+        public CellReuseBugViewModel()
         {
             Title = "CollectionView Refresh Bug";
             Items = new ObservableCollection<Item>();
@@ -50,10 +50,15 @@ namespace CollectionView_BugRepro.ViewModels
             {
                 Items.Clear();
                 var items = await DataStore.GetItemsAsync(true);
-                foreach (var item in items)
+
+                for (int i = 0; i < 7; i++)
                 {
-                    Items.Add(item);
+                    foreach (var item in items)
+                    {
+                        Items.Add(item);
+                    }
                 }
+                
             }
             catch (Exception ex)
             {

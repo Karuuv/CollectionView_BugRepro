@@ -14,12 +14,12 @@ namespace CollectionView_BugRepro.Services
         {
             items = new List<Item>()
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" }
             };
         }
 

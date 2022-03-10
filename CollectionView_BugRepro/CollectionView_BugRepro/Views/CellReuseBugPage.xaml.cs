@@ -1,17 +1,19 @@
 ﻿using CollectionView_BugRepro.ViewModels;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace CollectionView_BugRepro.Views
 {
-    public partial class ItemsPage : ContentPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class CellReuseBugPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        CellReuseBugViewModel _viewModel;
 
-        public ItemsPage()
+        public CellReuseBugPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new CellReuseBugViewModel();
         }
 
         protected override void OnAppearing()

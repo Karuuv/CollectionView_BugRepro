@@ -1,13 +1,12 @@
-﻿using CollectionView_BugRepro.Services;
-using CollectionView_BugRepro.Views;
-using System;
+﻿using CollectionView_BugRepro.Models;
+using CollectionView_BugRepro.Services;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CollectionView_BugRepro
 {
     public partial class App : Application
     {
+        public static LocalUserPreferences LocalPreferences { get; set; } = new LocalUserPreferences();
 
         public App()
         {
