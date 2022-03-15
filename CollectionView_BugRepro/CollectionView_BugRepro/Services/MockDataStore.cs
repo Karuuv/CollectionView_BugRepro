@@ -9,11 +9,46 @@ namespace CollectionView_BugRepro.Services
     public class MockDataStore : IDataStore<Item>
     {
         readonly List<Item> items;
+        readonly List<Item> moreItems;
 
         public MockDataStore()
         {
             items = new List<Item>()
             {
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" }
+            };
+
+            moreItems = new List<Item>()
+            {
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Distance=3.141592654, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Distance=186282, UnitOfMeasurement="Yards" },
+                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Distance=123, UnitOfMeasurement="yds" },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Distance=1337, UnitOfMeasurement="Yards" },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Distance=42, UnitOfMeasurement="yds" },
                 new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Distance=1024, UnitOfMeasurement="yds" },
@@ -55,6 +90,11 @@ namespace CollectionView_BugRepro.Services
         public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
+        }
+
+        public async Task<IEnumerable<Item>> GetMoreItemsAsync(bool forceRefresh = false)
+        {
+            return await Task.FromResult(moreItems);
         }
     }
 }

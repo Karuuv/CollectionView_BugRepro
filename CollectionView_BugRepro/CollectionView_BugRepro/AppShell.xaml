@@ -31,6 +31,7 @@
 
     <TabBar>
         <ShellContent Title="Bug 1" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:ItemsPage}" />
+        <ShellContent Title="Bug 2" Icon="icon_about.png" ContentTemplate="{DataTemplate local:CellReuseBugPage}" />
     </TabBar>
 
     <!--

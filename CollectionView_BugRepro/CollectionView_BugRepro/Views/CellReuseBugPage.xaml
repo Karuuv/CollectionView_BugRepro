@@ -3,31 +3,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CollectionView_BugRepro.Views.CellReuseBugPage"
              Title="{Binding Title}"
+             xmlns:views="clr-namespace:CollectionView_BugRepro.Views" 
              xmlns:local="clr-namespace:CollectionView_BugRepro.ViewModels"  
              xmlns:model="clr-namespace:CollectionView_BugRepro.Models"
              xmlns:cnvrtr="clr-namespace:CollectionView_BugRepro.Converters"
-             x:Name="BrowseItemsPage">
+             x:Name="CollectionReuseBugPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Repro Steps" Clicked="ReproStepsItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <cnvrtr:MeasurementUnitStringConverter x:Key="MeasurementUnitStringConverter" />
             <cnvrtr:YardsConverter x:Key="YardsConverter" />
+            <cnvrtr:IndexOfCollectionConverter x:Key="IndexOfCollectionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
 
         <StackLayout>
-            <Button Text="Switch Units of Measurement" Command="{Binding ToggleMeasurementUnitCommand}" Margin="8" FontSize="16" FontAttributes="Bold"/>
+            <Button Text="Switch Units of Measurement" Clicked="ToggleMeasurementUnits_Clicked" Margin="8" FontSize="16" FontAttributes="Bold"/>
             <Label Text="{Binding MeasurementUnitType}" HorizontalOptions="Center" FontSize="30" Margin="8"/>
-
-            <RefreshView x:DataType="local:ItemsViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+            <views:DistanceItemsView x:Name="DistanceItemsView" />
+            <!--<RefreshView x:DataType="local:CellReuseBugViewModel" Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
                 <CollectionView x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 SelectionMode="None">
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Padding="10" x:DataType="model:Item" Orientation="Horizontal" >
-                                <Label Text="{Binding Text}" 
+                                <Label Text="{Binding ., Converter={StaticResource IndexOfCollectionConverter}, ConverterParameter={x:Reference ItemsListView}, StringFormat=Item {0} }"
                                        LineBreakMode="NoWrap" 
                                        Style="{DynamicResource ListItemTextStyle}" 
                                        FontSize="16" />
@@ -45,7 +51,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            </RefreshView>
+            </RefreshView>-->
         </StackLayout>
 
     </ContentPage.Content>

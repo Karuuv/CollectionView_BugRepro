@@ -8,6 +8,10 @@
              xmlns:cnvrtr="clr-namespace:CollectionView_BugRepro.Converters"
              x:Name="BrowseItemsPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Repro Steps" Clicked="ReproStepsItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Resources>
         <ResourceDictionary>
             <cnvrtr:MeasurementUnitStringConverter x:Key="MeasurementUnitStringConverter" />

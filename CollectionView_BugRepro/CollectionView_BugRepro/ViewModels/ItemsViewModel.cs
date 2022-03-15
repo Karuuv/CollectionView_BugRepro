@@ -1,5 +1,4 @@
 ﻿using CollectionView_BugRepro.Models;
-using CollectionView_BugRepro.Views;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -38,8 +37,6 @@ namespace CollectionView_BugRepro.ViewModels
             Items = new ObservableCollection<Item>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
             ToggleMeasurementUnitCommand = new Command(async () => await ToggleSelectedUnitOfMeasurement());
-
-
         }
 
         async Task ExecuteLoadItemsCommand()
