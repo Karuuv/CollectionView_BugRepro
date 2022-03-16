@@ -1,4 +1,5 @@
 ﻿using CollectionView_BugRepro.ViewModels;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,6 +8,7 @@ namespace CollectionView_BugRepro.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class DistanceItemsView : ContentView
     {
+
         DistanceItemsViewModel viewModel;
         public DistanceItemsView()
         {
@@ -16,10 +18,14 @@ namespace CollectionView_BugRepro.Views
             viewModel.ExecuteLoadItemsCommand();
         }
 
-
-        public async void ToggleUnitOfMeasurement_Clicked()
+        public async Task ToggleUnitOfMeasurement_Clicked()
         {
             await viewModel.ToggleSelectedUnitOfMeasurement();
+        }
+
+        public async void RefreshData()
+        {
+            await viewModel.ExecuteLoadItemsCommand();
         }
 
     }

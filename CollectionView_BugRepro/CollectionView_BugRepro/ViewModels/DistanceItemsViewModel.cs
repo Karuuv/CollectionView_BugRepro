@@ -55,7 +55,6 @@ namespace CollectionView_BugRepro.ViewModels
         {
             if (!IsBusy)
             {
-                OnPropertyChanged("MeasurementUnitType");
                 await ExecuteLoadItemsCommand();
             }
         }

@@ -8,62 +8,79 @@
             <cnvrtr:BoolConverter x:Key="BoolConverter" />
             <cnvrtr:MeasurementUnitStringConverter x:Key="MeasurementUnitStringConverter" />
             <cnvrtr:YardsConverter x:Key="YardsConverter" />
+            <cnvrtr:IndexOfCollectionConverter x:Key="IndexOfCollectionConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid>
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsLoaded, Converter={StaticResource BoolConverter}}" 
                                    VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-        <CollectionView Margin="0,10"   IsVisible="{Binding IsLoaded}"                       
+        <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+            <CollectionView Margin="0,10"   IsVisible="{Binding IsLoaded}"  
+                        x:Name="itemsCollection"
                         BackgroundColor="Transparent"
                         ItemSizingStrategy="MeasureAllItems"                                                                        
                         HorizontalScrollBarVisibility="Never"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None"
                         ItemsLayout="HorizontalList">
-            <CollectionView.EmptyView>
-                <StackLayout Padding="12">
-                    <Label HorizontalOptions="Center" 
+                <CollectionView.EmptyView>
+                    <StackLayout Padding="12">
+                        <Label HorizontalOptions="Center" 
                                        Text="No items have been loaded."  />
-                </StackLayout>
-            </CollectionView.EmptyView>
-            <CollectionView.ItemTemplate>
-                <DataTemplate >
-                    <Grid Padding="5">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="50" />
-                        </Grid.RowDefinitions>
-                        <!--<Image Grid.Row="0" HeightRequest="35" >
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Achieved}" Value="False" TargetType="Image">
-                                            <Setter Property="Source" Value="trophy_off.png"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Achieved}" Value="True" TargetType="Image">
-                                            <Setter Property="Source" Value="trophy_on.png"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>-->
-                        <Label Grid.Row="0" LineBreakMode="WordWrap"
-                                                FontSize="Micro"
-                                                Text="{Binding Distance, Converter={StaticResource YardsConverter}}"
-                                                FontAttributes="Bold"
-                                                VerticalOptions="Center"
-                                                WidthRequest="75"
-                                                HorizontalTextAlignment="Center"/>
-                        <Label Grid.Row="1" LineBreakMode="WordWrap"
-                                                FontSize="Micro"
-                                                Text="{Binding UnitOfMeasurement, Converter={StaticResource MeasurementUnitStringConverter}}"
-                                                FontAttributes="Bold"
-                                                VerticalOptions="Center"
-                                                WidthRequest="75"
-                                                HorizontalTextAlignment="Center"/>
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                    </StackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid Padding="5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="50" />
+                            </Grid.RowDefinitions>
+
+                            <Ellipse Fill="#f2f2f2"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Grid.Row="0"
+                                StrokeThickness="4"
+                                WidthRequest="95"
+                                HeightRequest="95" />
+                            <Label Grid.Row="0" LineBreakMode="TailTruncation"
+                                FontSize="Small"
+                                Text="{Binding Distance, Converter={StaticResource YardsConverter}}"
+                                FontAttributes="Bold"
+                                VerticalOptions="Center"
+                                WidthRequest="80"
+                                HorizontalTextAlignment="Center"/>
+
+                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start">
+                                <Ellipse Fill="#2196F3"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                Grid.Row="0"
+                                StrokeThickness="4"
+                                WidthRequest="35"
+                                HeightRequest="35" />
+                                <Label Grid.Row="0"
+                                FontSize="Micro"
+                                Text="{Binding ., Converter={StaticResource IndexOfCollectionConverter}, ConverterParameter={x:Reference itemsCollection}}"
+                                VerticalOptions="Center"
+                                HorizontalTextAlignment="Center"
+                                WidthRequest="30"/>
+                            </Grid>
+
+
+
+                            <Label Grid.Row="1" LineBreakMode="TailTruncation"
+                                FontSize="Small"
+                                Text="{Binding UnitOfMeasurement, Converter={StaticResource MeasurementUnitStringConverter}}"
+                                VerticalOptions="Start"
+                                WidthRequest="80"
+                                HorizontalTextAlignment="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
     </Grid>
 </ContentView>

@@ -72,9 +72,10 @@ namespace CollectionView_BugRepro.ViewModels
             }
         }
 
-        public void OnAppearing()
+        public async Task OnAppearingAsync()
         {
             IsBusy = true;
+            await ExecuteLoadItemsCommand();
         }
 
 
