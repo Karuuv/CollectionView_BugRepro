@@ -11,26 +11,21 @@ namespace CollectionView_BugRepro.ViewModels
     public class CellReuseBugViewModel : BaseViewModel
     {
         public bool IsLoaded { get; set; } = false;
+        public Command ReloadCommand { get; }
+
 
         public string MeasurementUnitType
         {
             get
             {
-                if (App.LocalPreferences.UserDistanceUnit == LocalUserPreferences.DistanceUnit.Yards)
-                {
-                    return "Imperial";
-                }
-                else
-                {
-                    return "Metric";
-                }
+                return App.LocalPreferences.UserDistanceUnit == LocalUserPreferences.DistanceUnit.Yards ? "Imperial" : "Metric";
             }
         }
-
 
         public CellReuseBugViewModel()
         {
             Title = "CollectionView Cell Reuse Bug";
+            ReloadCommand = new Command(Reload);
             IsLoaded = true;
         }
 
@@ -43,5 +38,16 @@ namespace CollectionView_BugRepro.ViewModels
             }
         }
 
+        public void OnAppearing()
+        {
+            Reload();
+        }
+
+        public void Reload()
+        {
+            IsBusy = true;
+            OnPropertyChanged("MeasurementUnitType");
+            IsBusy = false;
+        }
     }
 }

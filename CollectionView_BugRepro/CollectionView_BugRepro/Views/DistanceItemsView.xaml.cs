@@ -23,9 +23,14 @@ namespace CollectionView_BugRepro.Views
             await viewModel.ToggleSelectedUnitOfMeasurement();
         }
 
-        public async void RefreshData()
+        public async Task RefreshData()
         {
             await viewModel.ExecuteLoadItemsCommand();
+        }
+
+        public void OnAppearing()
+        {
+            _ = viewModel.ExecuteLoadItemsCommand();
         }
 
     }

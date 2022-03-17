@@ -20,12 +20,24 @@ namespace CollectionView_BugRepro.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            viewModel.OnAppearing();
+            DistanceItemsView.OnAppearing();
         }
 
         private async void ToggleMeasurementUnits_Clicked(object sender, EventArgs e)
         {
             viewModel.ToggleSelectedUnitOfMeasurement();
             await DistanceItemsView.ToggleUnitOfMeasurement_Clicked();
+        }
+
+        private async void RefreshView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "IsRefreshing")
+            {
+                var refreshView = (RefreshView)sender;
+                if (refreshView != null && refreshView.IsRefreshing == false)
+                    await DistanceItemsView.RefreshData();
+            }
         }
     }
 }

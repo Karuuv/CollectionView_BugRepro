@@ -17,25 +17,27 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
+        <RefreshView Command="{Binding ReloadCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}" PropertyChanged="RefreshView_PropertyChanged">
+            <ScrollView VerticalOptions="FillAndExpand">
+                <Grid>
+                    <StackLayout>
+                        <Button Text="Switch Units of Measurement" Clicked="ToggleMeasurementUnits_Clicked" Margin="8" FontSize="16" FontAttributes="Bold"/>
+                        <Label Text="{Binding MeasurementUnitType}" HorizontalOptions="Center" FontSize="30" Margin="8"/>
+                        <views:DistanceItemsView x:Name="DistanceItemsView" HeightRequest="150" />
+                    </StackLayout>
 
-        <Grid>
-            <StackLayout>
-                <Button Text="Switch Units of Measurement" Clicked="ToggleMeasurementUnits_Clicked" Margin="8" FontSize="16" FontAttributes="Bold"/>
-                <Label Text="{Binding MeasurementUnitType}" HorizontalOptions="Center" FontSize="30" Margin="8"/>
-                <views:DistanceItemsView x:Name="DistanceItemsView" />
-            </StackLayout>
 
-            <ScrollView VerticalOptions="FillAndExpand"
-                            Grid.Row="1" BackgroundColor="#f5f5f5">
-                <StackLayout Margin="8,0">
-                    <Label Text="Reproduction Steps:" FontAttributes="Bold" FontSize="Large"/>
-                    <Label Text="Bug only for iOS" FontAttributes="Italic" FontSize="Small"/>
+                    <StackLayout Margin="8,0" Grid.Row="1" BackgroundColor="#f5f5f5">
+                        <Label Text="Reproduction Steps:" FontAttributes="Bold" FontSize="Large"/>
+                        <Label Text="Bug only for iOS" FontAttributes="Italic" FontSize="Small"/>
 
-                    <Label Text="• Tap the &quot;Switch Units&quot; button."/>
-                    <Label Text="• Look through the Collectionview items - there's likely at least one cell that didn't update."/>
-                </StackLayout>
+                        <Label Text="• Tap the &quot;Switch Units&quot; button."/>
+                        <Label Text="• Look through the Collectionview items - there's likely at least one cell that didn't update."/>
+                    </StackLayout>
+                </Grid>
             </ScrollView>
-        </Grid>
+        </RefreshView>
+
 
     </ContentPage.Content>
 </ContentPage>

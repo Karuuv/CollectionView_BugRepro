@@ -11,12 +11,10 @@
             <cnvrtr:IndexOfCollectionConverter x:Key="IndexOfCollectionConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Grid>
+    <Grid HeightRequest="150">
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsLoaded, Converter={StaticResource BoolConverter}}" 
-                                   VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" />
-        <RefreshView Command="{Binding LoadItemsCommand}" IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
-
-            <CollectionView Margin="0,10"   IsVisible="{Binding IsLoaded}"  
+                                   VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+        <CollectionView Margin="0,10"   IsVisible="{Binding IsLoaded}"  
                         x:Name="itemsCollection"
                         BackgroundColor="Transparent"
                         ItemSizingStrategy="MeasureAllItems"                                                                        
@@ -24,28 +22,28 @@
                         ItemsSource="{Binding Items}"
                         SelectionMode="None"
                         ItemsLayout="HorizontalList">
-                <CollectionView.EmptyView>
-                    <StackLayout Padding="12">
-                        <Label HorizontalOptions="Center" 
-                                       Text="No items have been loaded."  />
-                    </StackLayout>
-                </CollectionView.EmptyView>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate >
-                        <Grid Padding="5">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="50" />
-                            </Grid.RowDefinitions>
+            <CollectionView.EmptyView>
+                <StackLayout Padding="12">
+                    <Label HorizontalOptions="Center" 
+                                    Text="No items have been loaded."  />
+                </StackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate >
+                    <Grid Padding="5" >
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="100" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
 
-                            <Ellipse Fill="#f2f2f2"
+                        <Ellipse Fill="#f2f2f2"
                                 VerticalOptions="Center"
                                 HorizontalOptions="Center"
                                 Grid.Row="0"
                                 StrokeThickness="4"
                                 WidthRequest="95"
                                 HeightRequest="95" />
-                            <Label Grid.Row="0" LineBreakMode="TailTruncation"
+                        <Label Grid.Row="0" LineBreakMode="TailTruncation"
                                 FontSize="Small"
                                 Text="{Binding Distance, Converter={StaticResource YardsConverter}}"
                                 FontAttributes="Bold"
@@ -53,34 +51,33 @@
                                 WidthRequest="80"
                                 HorizontalTextAlignment="Center"/>
 
-                            <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start">
-                                <Ellipse Fill="#2196F3"
-                                VerticalOptions="Start"
-                                HorizontalOptions="Start"
-                                Grid.Row="0"
-                                StrokeThickness="4"
-                                WidthRequest="35"
-                                HeightRequest="35" />
-                                <Label Grid.Row="0"
-                                FontSize="Micro"
-                                Text="{Binding ., Converter={StaticResource IndexOfCollectionConverter}, ConverterParameter={x:Reference itemsCollection}}"
-                                VerticalOptions="Center"
-                                HorizontalTextAlignment="Center"
-                                WidthRequest="30"/>
-                            </Grid>
+                        <Grid Grid.Row="0" VerticalOptions="Start" HorizontalOptions="Start">
+                            <Ellipse Fill="#2196F3"
+                                    VerticalOptions="Start"
+                                    HorizontalOptions="Start"
+                                    Grid.Row="0"
+                                    StrokeThickness="4"
+                                    WidthRequest="35"
+                                    HeightRequest="35" />
+                                    <Label Grid.Row="0"
+                                    FontSize="Micro"
+                                    Text="{Binding ., Converter={StaticResource IndexOfCollectionConverter}, ConverterParameter={x:Reference itemsCollection}}"
+                                    VerticalOptions="Center"
+                                    HorizontalTextAlignment="Center"
+                                    WidthRequest="30"/>
+                        </Grid>
 
 
 
-                            <Label Grid.Row="1" LineBreakMode="TailTruncation"
+                        <Label Grid.Row="1" LineBreakMode="TailTruncation"
                                 FontSize="Small"
                                 Text="{Binding UnitOfMeasurement, Converter={StaticResource MeasurementUnitStringConverter}}"
                                 VerticalOptions="Start"
                                 WidthRequest="80"
-                                HorizontalTextAlignment="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+                                HorizontalTextAlignment="Center" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentView>

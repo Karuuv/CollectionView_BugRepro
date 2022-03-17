@@ -19,14 +19,7 @@ namespace CollectionView_BugRepro.ViewModels
         {
             get
             {
-                if (App.LocalPreferences.UserDistanceUnit == LocalUserPreferences.DistanceUnit.Yards)
-                {
-                    return "Imperial";
-                }
-                else
-                {
-                    return "Metric";
-                }
+                return App.LocalPreferences.UserDistanceUnit == LocalUserPreferences.DistanceUnit.Yards ? "Imperial" : "Metric";
             }
         }
 
@@ -75,6 +68,7 @@ namespace CollectionView_BugRepro.ViewModels
         public async Task OnAppearingAsync()
         {
             IsBusy = true;
+            OnPropertyChanged("MeasurementUnitType");
             await ExecuteLoadItemsCommand();
         }
 
