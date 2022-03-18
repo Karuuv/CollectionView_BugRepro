@@ -30,6 +30,7 @@ namespace CollectionView_BugRepro.Views
             await DistanceItemsView.ToggleUnitOfMeasurement_Clicked();
         }
 
+        //Workaround to tell child-view it needs to refresh when this page's RefreshView has finished running.
         private async void RefreshView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "IsRefreshing")

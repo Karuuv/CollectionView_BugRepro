@@ -11,9 +11,22 @@
             <cnvrtr:IndexOfCollectionConverter x:Key="IndexOfCollectionConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Grid HeightRequest="150">
+    <Grid HeightRequest="200">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsLoaded, Converter={StaticResource BoolConverter}}" 
                                    VerticalOptions="Center" HorizontalOptions="CenterAndExpand" />
+        <!--Sort Checkbox-->
+        <StackLayout Orientation="Horizontal" Grid.Row="0">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="CheckboxLayout_Tapped" NumberOfTapsRequired="1"/>
+            </StackLayout.GestureRecognizers>
+            <CheckBox Margin="8, 0, 0, 0" CheckedChanged="SortByDistance_CheckedChanged" x:Name="checkbox_distance"/>
+            <Label Text="Order by Distance" VerticalOptions="Center" />
+        </StackLayout>
+        
         <CollectionView Margin="0,10"   IsVisible="{Binding IsLoaded}"  
                         x:Name="itemsCollection"
                         BackgroundColor="Transparent"
@@ -21,7 +34,8 @@
                         HorizontalScrollBarVisibility="Never"
                         ItemsSource="{Binding Items}"
                         SelectionMode="None"
-                        ItemsLayout="HorizontalList">
+                        ItemsLayout="HorizontalList"
+                        Grid.Row="1">
             <CollectionView.EmptyView>
                 <StackLayout Padding="12">
                     <Label HorizontalOptions="Center" 

@@ -1,9 +1,8 @@
 ﻿using CollectionView_BugRepro.Models;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
+using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -26,7 +25,7 @@ namespace CollectionView_BugRepro.ViewModels
         }
 
 
-        public async Task ExecuteLoadItemsCommand()
+        public async Task ExecuteLoadItemsCommand(bool sortByDistance = false)
         {
             IsBusy = true;
 
@@ -34,6 +33,8 @@ namespace CollectionView_BugRepro.ViewModels
             {
                 Items.Clear();
                 var items = await DataStore.GetMoreItemsAsync(true);
+                if (sortByDistance)
+                    items = items.OrderBy(x => x.Distance);
 
                 foreach (var item in items)
                 {
@@ -51,11 +52,11 @@ namespace CollectionView_BugRepro.ViewModels
             }
         }
 
-        public async Task ToggleSelectedUnitOfMeasurement()
+        public async Task ToggleSelectedUnitOfMeasurement(bool sortByDistance = false)
         {
             if (!IsBusy)
             {
-                await ExecuteLoadItemsCommand();
+                await ExecuteLoadItemsCommand(sortByDistance);
             }
         }
 

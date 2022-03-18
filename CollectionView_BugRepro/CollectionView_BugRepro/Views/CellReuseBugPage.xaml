@@ -4,8 +4,6 @@
              x:Class="CollectionView_BugRepro.Views.CellReuseBugPage"
              Title="{Binding Title}"
              xmlns:views="clr-namespace:CollectionView_BugRepro.Views" 
-             xmlns:local="clr-namespace:CollectionView_BugRepro.ViewModels"  
-             xmlns:model="clr-namespace:CollectionView_BugRepro.Models"
              xmlns:cnvrtr="clr-namespace:CollectionView_BugRepro.Converters"
              x:Name="CollectionReuseBugPage">
 
@@ -23,7 +21,7 @@
                     <StackLayout>
                         <Button Text="Switch Units of Measurement" Clicked="ToggleMeasurementUnits_Clicked" Margin="8" FontSize="16" FontAttributes="Bold"/>
                         <Label Text="{Binding MeasurementUnitType}" HorizontalOptions="Center" FontSize="30" Margin="8"/>
-                        <views:DistanceItemsView x:Name="DistanceItemsView" HeightRequest="150" />
+                        <views:DistanceItemsView x:Name="DistanceItemsView" HeightRequest="200" />
                     </StackLayout>
 
 
